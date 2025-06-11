@@ -7,13 +7,17 @@ interface FoodItemProps {
   food: Food
   isInPlate?: boolean
   onRemove?: () => void
+  onDragStart?: (food: Food) => void
 }
 
-export default function FoodItem({ food, isInPlate = false, onRemove }: FoodItemProps) {
+export default function FoodItem({ food, isInPlate = false, onRemove, onDragStart }: FoodItemProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [{ isDragging }, dragRef] = useDrag<Food, unknown, { isDragging: boolean }>(() => ({
     type: 'food',
-    item: food,
+    item: () => {
+      onDragStart?.(food)
+      return food
+    },
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

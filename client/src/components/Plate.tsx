@@ -30,12 +30,12 @@ export default function Plate({ plateFoods, onFoodAdded, onFoodRemoved, title, d
   const totalWater = plateFoods.reduce((sum, food) => sum + food.water, 0)
   const totalSurface = plateFoods.reduce((sum, food) => sum + food.surface, 0)
 
-  const getImpactLevel = (co2: number) => {
-    if (co2 < 2) return { level: 'Faible', color: 'text-green-600' }
-    if (co2 < 4) return { level: 'Modéré', color: 'text-yellow-600' }
-    if (co2 < 6) return { level: 'Élevé', color: 'text-orange-600' }
-    return { level: 'Très élevé', color: 'text-red-600' }
-  }
+  const getImpactLevel = (totalCo2: number) => {
+    if (totalCo2 < 5) return { level: 'faible', color: 'text-green-600' };
+    if (totalCo2 < 15) return { level: 'modéré', color: 'text-yellow-600' };
+    if (totalCo2 < 25) return { level: 'élevé', color: 'text-orange-600' };
+    return { level: 'très élevé', color: 'text-red-600' };
+  };
 
   const impactLevel = getImpactLevel(totalCo2)
 

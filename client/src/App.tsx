@@ -3,6 +3,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import type { Food, PlateFood } from './types'
 import { foods } from './data/foods'
+import foodFacts from './data/food.json'
 import Counter from './components/Counter'
 import FoodCard from './components/FoodCard'
 import Plate from './components/Plate'
@@ -140,33 +141,120 @@ function App() {
                 Le saviez-vous ?
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4 bg-red-50 rounded-lg border border-red-100">
-                  <div className="text-3xl mb-2">🥩</div>
-                  <h3 className="font-semibold text-red-800 mb-2">Viande rouge</h3>
-                  <p className="text-sm text-red-700">
-                    La production de viande de bœuf génère en moyenne 27 kg de CO₂
-                    et nécessite plus de 15 000 litres d'eau par kg de viande.
-                  </p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {foodFacts.map((fact) => {
+                  // Définir les couleurs et emojis en fonction du contenu
+                  const getCardStyle = (id: number) => {
+                    switch (id) {
+                      case 0: // Émissions mondiales
+                        return {
+                          bg: 'from-red-50 to-orange-50',
+                          border: 'border-red-100',
+                          text: 'text-red-800',
+                          content: 'text-red-700',
+                          source: 'text-red-600',
+                          emoji: '🌍'
+                        };
+                      case 1: // Méthane
+                        return {
+                          bg: 'from-orange-50 to-amber-50',
+                          border: 'border-orange-100',
+                          text: 'text-orange-800',
+                          content: 'text-orange-700',
+                          source: 'text-orange-600',
+                          emoji: '💨'
+                        };
+                      case 2: // Production de viande
+                        return {
+                          bg: 'from-amber-50 to-yellow-50',
+                          border: 'border-amber-100',
+                          text: 'text-amber-800',
+                          content: 'text-amber-700',
+                          source: 'text-amber-600',
+                          emoji: '🥩'
+                        };
+                      case 3: // Utilisation des sols
+                        return {
+                          bg: 'from-yellow-50 to-lime-50',
+                          border: 'border-yellow-100',
+                          text: 'text-yellow-800',
+                          content: 'text-yellow-700',
+                          source: 'text-yellow-600',
+                          emoji: '🌱'
+                        };
+                      case 4: // Déforestation
+                        return {
+                          bg: 'from-lime-50 to-green-50',
+                          border: 'border-lime-100',
+                          text: 'text-lime-800',
+                          content: 'text-lime-700',
+                          source: 'text-lime-600',
+                          emoji: '🌳'
+                        };
+                      case 5: // Empreinte au sol
+                        return {
+                          bg: 'from-green-50 to-emerald-50',
+                          border: 'border-green-100',
+                          text: 'text-green-800',
+                          content: 'text-green-700',
+                          source: 'text-green-600',
+                          emoji: '📏'
+                        };
+                      case 6: // Consommation d'eau
+                        return {
+                          bg: 'from-emerald-50 to-teal-50',
+                          border: 'border-emerald-100',
+                          text: 'text-emerald-800',
+                          content: 'text-emerald-700',
+                          source: 'text-emerald-600',
+                          emoji: '💧'
+                        };
+                      case 7: // Choix alimentaires
+                        return {
+                          bg: 'from-teal-50 to-cyan-50',
+                          border: 'border-teal-100',
+                          text: 'text-teal-800',
+                          content: 'text-teal-700',
+                          source: 'text-teal-600',
+                          emoji: '🌿'
+                        };
+                      default:
+                        return {
+                          bg: 'from-green-50 to-emerald-50',
+                          border: 'border-green-100',
+                          text: 'text-green-800',
+                          content: 'text-green-700',
+                          source: 'text-green-600',
+                          emoji: '💡'
+                        };
+                    }
+                  };
 
-                <div className="text-center p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                  <div className="text-3xl mb-2">🍗</div>
-                  <h3 className="font-semibold text-yellow-800 mb-2">Volaille</h3>
-                  <p className="text-sm text-yellow-700">
-                    Le poulet a un impact environnemental 4 fois moindre que le bœuf,
-                    avec environ 7 kg de CO₂ par kg de viande.
-                  </p>
-                </div>
+                  const style = getCardStyle(fact.id);
 
-                <div className="text-center p-4 bg-green-50 rounded-lg border border-green-100">
-                  <div className="text-3xl mb-2">🌱</div>
-                  <h3 className="font-semibold text-green-800 mb-2">Végétaux</h3>
-                  <p className="text-sm text-green-700">
-                    Les protéines végétales comme les lentilles ou le tofu ont
-                    l'impact environnemental le plus faible.
-                  </p>
-                </div>
+                  return (
+                    <div
+                      key={fact.id}
+                      className={`p-6 bg-gradient-to-br ${style.bg} rounded-xl ${style.border} shadow-md hover:shadow-lg transition-shadow duration-300`}
+                    >
+                      <div className="flex items-start mb-4">
+                        <span className="text-2xl mr-3 animate-pulse-slow">{style.emoji}</span>
+                        <h3 className={`font-bold ${style.text} text-lg`}>{fact.titre}</h3>
+                      </div>
+                      <p className={`text-sm ${style.content} mb-4 leading-relaxed bg-white/50 p-3 rounded-lg ${style.border}`}>
+                        {fact.chiffre}
+                      </p>
+                      <div className={`text-xs ${style.source} bg-white/30 p-3 rounded-lg ${style.border}`}>
+                        <p className="font-semibold mb-2">Sources :</p>
+                        <ul className="list-disc list-inside space-y-1">
+                          {fact.sources.map((source, index) => (
+                            <li key={index}>{source}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

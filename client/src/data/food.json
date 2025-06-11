@@ -1,0 +1,57 @@
+[
+  {
+    "id": 0,
+    "titre": "Part de l'élevage dans les émissions mondiales",
+    "chiffre": "4,5 % à 18 % des émissions mondiales de gaz à effet de serre d'origine humaine.",
+    "sources": [
+      "Organisation des Nations unies pour l'alimentation et l'agriculture (FAO)",
+      "Institute for Climate Economics (I4CE)"
+    ]
+  },
+  {
+    "id": 1,
+    "titre": "Le méthane, un puissant gaz à effet de serre",
+    "chiffre": "À court terme, le méthane a un pouvoir de réchauffement plus de 25 fois supérieur à celui du CO2.",
+    "sources": [
+      "Groupe d'experts intergouvernemental sur l'évolution du climat (GIEC)"
+    ]
+  },
+  {
+    "id": 2,
+    "titre": "La production de viande de bœuf est de loin la plus émettrice.",
+    "chiffre": "Produire 1 kg de bœuf émet environ 60 kg de CO2 équivalent. Produire 1 kg de porc émet environ 7,6 kg de CO2 équivalent.Produire 1 kg de poulet émet environ 5,7 kg de CO2 équivalent.",
+    "sources": [
+      "Études comparatives issues de publications scientifiques comme celle parue dans 'Science' (Poore & Nemecek, 2018)"
+    ]
+  },
+  {
+    "id": 3,
+    "titre": "Utilisation des Sols et Déforestation",
+    "chiffre": "Près de 80 % de la surface agricole mondiale est utilisée pour l'élevage, que ce soit pour les pâturages ou pour la culture de l'alimentation animale (soja, maïs, etc.).",
+    "sources": ["FAO"]
+  },
+  {
+    "id": 4,
+    "titre": "Moteur principal de la déforestation",
+    "chiffre": " L'élevage bovin est reconnu comme la première cause de déforestation dans le monde, particulièrement en Amazonie où des forêts sont rasées pour créer des pâturage",
+    "sources": ["FAO", "Greenpeace"]
+  },
+  {
+    "id": 5,
+    "titre": "Empreinte au sol d'un régime alimentaire",
+    "chiffre": "Un régime alimentaire végétalien nécessite environ 1300 m² par an. Un régime alimentaire moyen français (avec viande) nécessite environ 4300 m² par an.",
+    "sources": ["ADEME Infos, 2021"]
+  },
+  {
+    "id": 6,
+    "titre": "Consommation d'Eau",
+    "chiffre": "Il est souvent cité qu'il faut en moyenne 15 400 litres d'eau pour produire 1 kg de viande de bœuf.Bœuf : 15 400 litres/kg. Porc : 6 000 litres/kg. Poulet : 4 300 litres/kg. À titre de comparaison, les légumineuses nécessitent environ 4 000 litres/kg et les céréales environ 1 600 litres/kg",
+    "sources": ["Water Footprint Network"]
+  },
+  {
+    "id": 7,
+    "titre": "Modifier ses choix alimentaires peut préserver la planète",
+    "chiffre": "Si les populations de 54 pays à revenu élevé passaient à un régime axé sur les plantes, les émissions annuelles de la production agricole de ces pays pourraient chuter de plus de 60%.",
+    "sources": ["Nature food 2022"]
+  }
+]
