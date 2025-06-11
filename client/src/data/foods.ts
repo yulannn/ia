@@ -20,15 +20,6 @@ export const foods: Food[] = [
     surface: 28.0, // m² par kg
   },
   {
-    id: 'cheese',
-    name: 'Fromage',
-    emoji: '🧀',
-    category: 'dairy',
-    co2: 13.5,
-    water: 5000,
-    surface: 8.0,
-  },
-  {
     id: 'pork',
     name: 'Porc',
     emoji: '🐷',
