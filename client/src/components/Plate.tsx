@@ -31,28 +31,45 @@ export default function Plate({ plateFoods, onFoodAdded, onFoodRemoved, title, d
   const totalSurface = plateFoods.reduce((sum, food) => sum + food.surface, 0)
 
   const getImpactLevel = (totalCo2: number) => {
-    if (totalCo2 < 5) return { level: 'faible', color: 'text-green-600' };
-    if (totalCo2 < 15) return { level: 'modéré', color: 'text-yellow-600' };
+    if (totalCo2 < 10) return { level: 'faible', color: 'text-green-600' };
+    if (totalCo2 < 18) return { level: 'modéré', color: 'text-yellow-600' };
     if (totalCo2 < 25) return { level: 'élevé', color: 'text-orange-600' };
     return { level: 'très élevé', color: 'text-red-600' };
   };
 
   const impactLevel = getImpactLevel(totalCo2)
 
+  const getPlateColor = () => {
+    const totalCo2 = plateFoods.reduce((sum, food) => sum + food.co2, 0);
+    if (totalCo2 === 0) return 'bg-white';
+    if (totalCo2 < 10) return 'bg-red-50';
+    if (totalCo2 < 18) return 'bg-red-100';
+    if (totalCo2 < 25) return 'bg-red-200';
+    if (totalCo2 < 30) return 'bg-red-400';
+    return 'bg-red-400';
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
       {/* Titre et description de l'assiette */}
-      <div className="mb-6 text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">{title}</h2>
-        <p className="text-gray-600">{description}</p>
+      <div className="flex items-center mb-4">
+        <span className="text-2xl mr-3 animate-bounce-slow">🍽️</span>
+        <h2 className="text-xl font-bold text-gray-800">{title}</h2>
       </div>
+      <p className="text-sm text-gray-600 mb-6">{description}</p>
 
       {/* Zone de dépôt */}
       <div
         ref={ref}
-        className={`relative min-h-[300px] rounded-full border-2 ${isOver ? 'border-green-500 bg-green-50' : 'border-gray-300'
-          } ${plateFoods.length === 0 ? 'border-dashed animate-pulse-slow' : 'border-solid'
-          } transition-all duration-300 hover:shadow-lg hover:scale-[1.02]`}
+        className={`
+          relative aspect-square w-full max-w-[300px] mx-auto rounded-full border-2
+          ${plateFoods.length === 0 ? 'border-dashed' : 'border-solid'}
+          ${plateFoods.length === 0 ? 'border-gray-300' : 'border-gray-400'}
+          ${plateFoods.length === 0 ? 'animate-pulse-slow' : ''}
+          transition-all duration-300
+          hover:shadow-lg hover:scale-[1.02]
+          ${getPlateColor()}
+        `}
       >
         {plateFoods.length === 0 ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 animate-pulse-slow">
