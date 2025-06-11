@@ -10,7 +10,7 @@ const FoodCard: React.FC<FoodCardProps> = ({ foods, onFoodDragStart }) => {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 h-fit">
       <div className="flex items-center mb-6">
-        <span className="text-2xl mr-3">🥘</span>
+        <span className="text-2xl mr-3 animate-bounce-slow">🥘</span>
         <h2 className="text-xl font-bold text-gray-800">Carte des aliments</h2>
       </div>
 
@@ -29,7 +29,9 @@ const FoodCard: React.FC<FoodCardProps> = ({ foods, onFoodDragStart }) => {
       </div>
 
       <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-        <h4 className="font-semibold text-green-800 mb-2">💡 Astuce</h4>
+        <h4 className="font-semibold text-green-800 mb-2 flex items-center">
+          <span className="mr-2 animate-pulse-slow">💡</span> Astuce
+        </h4>
         <p className="text-sm text-green-700">
           Les aliments végétaux ont généralement un impact environnemental plus faible
           que les produits d'origine animale.

@@ -1,11 +1,11 @@
 export interface Food {
   id: string;
   name: string;
-  image: string;
+  emoji: string;
+  category: 'meat' | 'poultry' | 'vegetable' | 'dairy' | 'legume';
   co2: number; // kg CO₂
   water: number; // litres
   surface: number; // m²
-  category: 'meat' | 'poultry' | 'vegetable' | 'dairy' | 'legume';
 }
 
 export interface PlateFood extends Food {

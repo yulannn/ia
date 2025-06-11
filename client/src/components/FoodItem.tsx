@@ -1,77 +1,82 @@
-import type { Food } from '../types';
+import { useDrag } from 'react-dnd'
+import type { DragSourceMonitor } from 'react-dnd'
+import type { Food } from '../types'
+import { useRef } from 'react'
 
 interface FoodItemProps {
-  food: Food;
-  onDragStart?: (food: Food) => void;
-  isInPlate?: boolean;
-  onRemove?: (foodId: string) => void;
+  food: Food
+  isInPlate?: boolean
+  onRemove?: () => void
 }
 
-const FoodItem: React.FC<FoodItemProps> = ({
-  food,
-  onDragStart,
-  isInPlate = false,
-  onRemove
-}) => {
-  const handleDragStart = (e: React.DragEvent) => {
-    e.dataTransfer.setData('application/json', JSON.stringify(food));
-    if (onDragStart) {
-      onDragStart(food);
-    }
-  };
+export default function FoodItem({ food, isInPlate = false, onRemove }: FoodItemProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [{ isDragging }, dragRef] = useDrag<Food, unknown, { isDragging: boolean }>(() => ({
+    type: 'food',
+    item: food,
+    collect: (monitor: DragSourceMonitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }))
 
-  const handleClick = () => {
-    if (isInPlate && onRemove) {
-      onRemove(food.id);
-    }
-  };
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'meat': return 'border-red-400 bg-red-50';
-      case 'poultry': return 'border-orange-400 bg-orange-50';
-      case 'vegetable': return 'border-green-400 bg-green-50';
-      case 'dairy': return 'border-blue-400 bg-blue-50';
-      case 'legume': return 'border-purple-400 bg-purple-50';
-      default: return 'border-gray-400 bg-gray-50';
-    }
-  };
+  dragRef(ref)
 
   return (
     <div
+      ref={ref}
       className={`
-        relative p-3 rounded-lg border-2 cursor-pointer transition-all duration-200
-        ${getCategoryColor(food.category)}
-        ${isInPlate ? 'hover:bg-red-100 hover:border-red-500' : 'hover:shadow-lg hover:scale-105'}
+        relative group cursor-move
         ${isInPlate ? 'w-16 h-16' : 'w-24 h-32'}
+        ${isDragging ? 'opacity-50' : 'opacity-100'}
+        transition-all duration-300
+        ${isInPlate
+          ? 'hover:bg-red-100 hover:border-red-500 hover:scale-110'
+          : 'hover:shadow-lg hover:scale-105 hover:border-gray-400'
+        }
       `}
-      draggable={!isInPlate}
-      onDragStart={handleDragStart}
-      onClick={handleClick}
-      title={isInPlate ? 'Cliquer pour retirer' : food.name}
     >
-      <div className="text-center">
-        <div className={`text-2xl mb-1 ${isInPlate ? 'text-lg' : ''}`}>
-          {food.image}
-        </div>
+      <div className={`
+        w-full h-full
+        flex flex-col items-center justify-center
+        rounded-lg border-2
+        ${isInPlate ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-white'}
+        p-2
+        ${isInPlate ? 'animate-pulse-slow' : ''}
+      `}>
+        <span className="text-3xl mb-1">{food.emoji}</span>
+        <span className="text-xs text-center font-medium text-gray-700">
+          {food.name}
+        </span>
+
+        {isInPlate && onRemove && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onRemove()
+            }}
+            className="
+              absolute -top-2 -right-2
+              w-6 h-6
+              bg-red-500 text-white
+              rounded-full
+              flex items-center justify-center
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-200
+              hover:bg-red-600
+              shadow-md
+              animate-bounce-slow
+            "
+          >
+            ×
+          </button>
+        )}
+
         {!isInPlate && (
-          <>
-            <h3 className="font-semibold text-sm text-gray-800 mb-2">{food.name}</h3>
-            <div className="text-xs text-gray-600 space-y-1">
-              <div>🌍 {food.co2} kg CO₂</div>
-              <div>💧 {food.water}L</div>
-              <div>🌾 {food.surface}m²</div>
-            </div>
-          </>
+          <div className="mt-1 text-xs text-gray-500">
+            {food.co2.toFixed(1)} kg CO₂
+          </div>
         )}
       </div>
-      {isInPlate && (
-        <div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
-          ×
-        </div>
-      )}
     </div>
-  );
-};
-
-export default FoodItem; 
+  )
+} 
