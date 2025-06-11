@@ -110,10 +110,7 @@ export default function Plate({ plateFoods, onFoodAdded, onFoodRemoved, title, d
           </div>
 
           <div className="text-center text-sm text-gray-600 mt-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            Impact {impactLevel.level.toLowerCase()} : {impactLevel.level === 'Faible' ? 'Excellent choix !' :
-              impactLevel.level === 'Modéré' ? 'Peut être amélioré' :
-                impactLevel.level === 'Élevé' ? 'Impact significatif' :
-                  'Impact très important sur l\'environnement'}
+            Impact {impactLevel.level.toLowerCase()}
           </div>
         </div>
       )}

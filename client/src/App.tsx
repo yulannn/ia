@@ -108,6 +108,12 @@ function App() {
                           balancedPlateFoods.reduce((sum, food) => sum + food.co2, 0)
                         ).toFixed(1)} kg
                       </div>
+                      <p className="text-sm text-orange-700 mt-2">
+                        ≈ {Math.round(Math.abs(
+                          standardPlateFoods.reduce((sum, food) => sum + food.co2, 0) -
+                          balancedPlateFoods.reduce((sum, food) => sum + food.co2, 0)
+                        ) * 100)} km en voiture
+                      </p>
                     </div>
                     <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
                       <h4 className="font-semibold text-blue-800 mb-2">Économie d'eau</h4>
@@ -117,6 +123,12 @@ function App() {
                           balancedPlateFoods.reduce((sum, food) => sum + food.water, 0)
                         ).toFixed(0)} L
                       </div>
+                      <p className="text-sm text-blue-700 mt-2">
+                        ≈ {Math.round(Math.abs(
+                          standardPlateFoods.reduce((sum, food) => sum + food.water, 0) -
+                          balancedPlateFoods.reduce((sum, food) => sum + food.water, 0)
+                        ) / 100)} douches
+                      </p>
                     </div>
                     <div className="text-center p-4 bg-green-50 rounded-lg border border-green-100">
                       <h4 className="font-semibold text-green-800 mb-2">Économie de surface</h4>
@@ -126,6 +138,12 @@ function App() {
                           balancedPlateFoods.reduce((sum, food) => sum + food.surface, 0)
                         ).toFixed(1)} m²
                       </div>
+                      <p className="text-sm text-green-700 mt-2">
+                        ≈ {Math.round(Math.abs(
+                          standardPlateFoods.reduce((sum, food) => sum + food.surface, 0) -
+                          balancedPlateFoods.reduce((sum, food) => sum + food.surface, 0)
+                        ) / 2)} places de parking
+                      </p>
                     </div>
                   </div>
                 </div>
