@@ -58,7 +58,7 @@ function App() {
           {/* Interface principale */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* Carte des aliments à gauche */}
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1 lg:sticky lg:top-8 lg:self-start lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto">
               <FoodCard
                 foods={foods}
                 onFoodDragStart={(food) => console.log('Début du drag:', food.name)}
